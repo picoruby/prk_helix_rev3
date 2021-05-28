@@ -78,4 +78,21 @@ rgb.effect = :rainbow
 # Append the feature. Will possibly be able to write `Keyboard#append(OLED.new)` in the future
 kbd.append rgb
 
+# Initialize RotaryEncoder with pin_a and pin_b
+rotary_encoder = RotaryEncoder.new(21, 9)
+# Note: These implementations are still ad-hoc
+rotary_encoder.clockwise do
+  # DOWN
+  report_hid(0, "\121\000\000\000\000\000")
+  sleep_ms 5
+  report_hid(0, "\000\000\000\000\000\000")
+end
+rotary_encoder.counterclockwise do
+  # UP
+  report_hid(0, "\122\000\000\000\000\000")
+  sleep_ms 5
+  report_hid(0, "\000\000\000\000\000\000")
+end
+kbd.append rotary_encoder
+
 kbd.start!
