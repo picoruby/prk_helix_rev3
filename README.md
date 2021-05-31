@@ -10,3 +10,6 @@
 
 - Rotary encoders still don't work on PRK Firmware
 
+### License
+
+Copyright © 2021 HASUMI Hitoshi. See MIT-LICENSE for further details.
