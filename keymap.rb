@@ -77,20 +77,26 @@ rgb.effect = :rainbow
 kbd.append rgb
 
 # Initialize RotaryEncoder with pin_a and pin_b
-rotary_encoder = RotaryEncoder.new(21, 9)
-# Note: These implementations are still ad-hoc
-rotary_encoder.clockwise do
-  # DOWN
-  report_hid(0, "\121\000\000\000\000\000")
-  sleep_ms 5
-  report_hid(0, "\000\000\000\000\000\000")
+encoder_left = RotaryEncoder.new(21, 9)
+encoder_left.configure :left
+# These implementations are still ad-hoc
+encoder_left.clockwise do
+  kbd.send_key :KC_PGDOWN
 end
-rotary_encoder.counterclockwise do
-  # UP
-  report_hid(0, "\122\000\000\000\000\000")
-  sleep_ms 5
-  report_hid(0, "\000\000\000\000\000\000")
+encoder_left.counterclockwise do
+  kbd.send_key :KC_PGUP
 end
-kbd.append rotary_encoder
+kbd.append encoder_left
+
+encoder_right = RotaryEncoder.new(21, 9)
+encoder_right.configure :right
+# These implementations are still ad-hoc
+encoder_right.clockwise do
+  kbd.send_key :KC_DOWN
+end
+encoder_right.counterclockwise do
+  kbd.send_key :KC_UP
+end
+kbd.append encoder_right
 
 kbd.start!
