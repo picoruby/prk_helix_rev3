@@ -1,9 +1,3 @@
-# Wait until Keyboard class is ready
-sleep 1
-while !$mutex
-  relinquish
-end
-
 # Initialize a Keyboard
 kbd = Keyboard.new
 
